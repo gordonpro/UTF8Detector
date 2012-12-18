@@ -3,20 +3,14 @@ package com.geekxx.utf8.tool;
 import java.io.File;
 import java.util.List;
 
-import com.geekxx.utf8.AppMem;
-
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventTarget;
-import javafx.scene.Parent;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
+
+import com.geekxx.utf8.AppMem;
 
 public class ButtonEvent implements EventHandler<ActionEvent>{
 	
@@ -34,7 +28,7 @@ public class ButtonEvent implements EventHandler<ActionEvent>{
 			
 		}
 		else if(target == mem.bt_DetectNonUtf8){
-			
+			listNonUTF8();
 		}
 		else if(target == mem.bt_ListFilteredFiles){
 			listFilteredFiles();
@@ -55,6 +49,8 @@ public class ButtonEvent implements EventHandler<ActionEvent>{
 	 * 列出过滤之后的文件
 	 */
 	private void listFilteredFiles(){
+		//先清空上一次的缓存
+		mem.filteredFiles.clear();
 		//得到要过滤的条件
 		String ct = mem.txtf_Filter.getText().trim();
 		String[] subs = ct.split(",");
@@ -67,6 +63,22 @@ public class ButtonEvent implements EventHandler<ActionEvent>{
 			filePathes.add(file.getAbsolutePath());
 		}
 		mem.list_Result.setItems(filePathes);
+	}
+	
+	/**
+	 * 列出带BOM的UTF8文件
+	 */
+	private void listNonUTF8(){
+		//先列出文件
+		listFilteredFiles();
+		ObservableList<String> nonUtf8files = FXCollections.observableArrayList();
+		for (File file : mem.filteredFiles) {
+			//如果不是UTF8格式，就加入集合
+			if(!CommonUtil.detectUTF8(file)){
+				nonUtf8files.add(file.getAbsolutePath());
+			}
+		}
+		mem.list_Result.setItems(nonUtf8files);
 	}
 	
 	private void handleCoverUtf8(){

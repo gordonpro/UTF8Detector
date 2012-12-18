@@ -1,8 +1,16 @@
 package com.geekxx.utf8.tool;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+
+import com.geekxx.utf8.AppMem;
 
 
 /**
@@ -11,17 +19,8 @@ import java.util.List;
  */
 public class CommonUtil {
 	
-	/**
-	 * 符合条件的文件
-	 */
-	private static final List<File> filteredFiles = new ArrayList<File>();
+	private static AppMem mem = AppMem.getInstance();
 	
-	/**
-	 * 符合条件的文件的绝对路径
-	 * @deprecated 不需要这个，只需要重新遍历获取。2012年12月18日 13:53:45
-	 */
-	@Deprecated
-	private static final List<String> filteredFilesName = new ArrayList<>();
 	/**
 	 * 从指定目录中获取所有的文件，包括子目录中，无限递归
 	 * @param path 指定的路径(目录)的File形式
@@ -50,13 +49,40 @@ public class CommonUtil {
 				//遍历过滤内容，符合条件的加入容器
 				for (String f : filter) {
 					if(f.equals(suffix)){
-						filteredFiles.add(file);
-						filteredFilesName.add(file.getName());
+						mem.filteredFiles.add(file);
 					}
 				}
 			}
 		}
 		
-		return filteredFiles;
+		return mem.filteredFiles;
+	}
+
+	/**
+	 * 检测文件是否是UTF8 只能检查出带BOM的UTF8
+	 * @param allFile 要检查的文件集合
+	 * @return 如果是UTF8就返回true
+	 */
+	public static boolean  detectUTF8(File file){
+		try {
+			InputStream in = new FileInputStream(file);
+			byte[] header = new byte[3];
+			in.read(header);
+			in.close();
+			if(header[0] == -17 && header[1]== -69 && header[2]==-65){
+				return true;
+			}
+			else{
+				System.out.println(file.getAbsolutePath()+"不是utf8");
+				return false;
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showConfirmDialog(null, file.getAbsolutePath()+"不存在");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

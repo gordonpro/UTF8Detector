@@ -1,5 +1,9 @@
 package com.geekxx.utf8;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -58,6 +62,17 @@ public class AppMem {
 	 */
 	public ButtonEvent buttonEvent;
 	
+	/**
+	 * 过滤结果装在里面
+	 */
+	public List<File> filteredFiles = null;
+	
+	/**
+	 * 非UTF8文件装在里面
+	 */
+	public List<File> nonUtf8Files = null;
+	
+	
 	public void init(Scene s){
 		bt_ChooseDir = (Button) s.lookup("#main_bt_ChooseDir");
 		bt_ListFilteredFiles = (Button) s.lookup("#main_bt_ListFilteredFiles");
@@ -67,6 +82,9 @@ public class AppMem {
 		txtf_Filter = (TextField) s.lookup("#main_txtf_Filter");
 		list_Result = (ListView<String>) s.lookup("#main_list");
 		bindEvent();
+		
+		filteredFiles = new ArrayList<>();
+		nonUtf8Files = new ArrayList<>();
 	}
 	
 	/**
@@ -76,6 +94,7 @@ public class AppMem {
 		buttonEvent = new ButtonEvent();
 		bt_ChooseDir.setOnAction(buttonEvent);
 		bt_ListFilteredFiles.setOnAction(buttonEvent);
+		bt_DetectNonUtf8.setOnAction(buttonEvent);
 	}
 	
 	
