@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="389.999977929685" prefWidth="481.9998779296875" xmlns:fx="http://javafx.com/fxml">
+  <children>
+    <VBox layoutX="0.0" layoutY="0.0" prefHeight="390.0" prefWidth="482.0">
+      <children>
+        <HBox prefHeight="100.0" prefWidth="200.0">
+          <children>
+            <GridPane alignment="CENTER" prefHeight="100.0" prefWidth="385.0">
+              <children>
+                <TextField prefWidth="200.0" text="java" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <GridPane.margin>
+                    <Insets left="12.0" right="12.0" fx:id="x1" />
+                  </GridPane.margin>
+                </TextField>
+                <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="0" />
+                <Button mnemonicParsing="false" text="选择文件" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                <Button mnemonicParsing="false" text="列出" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <Label text="文件夹" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label text="文件后缀：" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="179.0" minWidth="10.0" prefWidth="89.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="276.0" minWidth="10.0" prefWidth="263.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="179.0" minWidth="10.0" prefWidth="89.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="108.0">
+              <children>
+                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="97.0" text="检测非UTF-8">
+                  <VBox.margin>
+                    <Insets left="3.0" right="3.0" />
+                  </VBox.margin>
+                </Button>
+                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="97.0" text="转成UTF-8">
+                  <VBox.margin>
+                    <Insets top="2.0" />
+                  </VBox.margin>
+                </Button>
+              </children>
+            </VBox>
+          </children>
+        </HBox>
+        <ListView prefHeight="290.0" prefWidth="482.0" />
+      </children>
+    </VBox>
+  </children>
+</AnchorPane>
