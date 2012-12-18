@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 import com.geekxx.utf8.tool.ButtonEvent;
+import com.geekxx.utf8.tool.ListViewEvent;
 
 
 /**
@@ -95,6 +96,7 @@ public class AppMem {
 		bt_ChooseDir.setOnAction(buttonEvent);
 		bt_ListFilteredFiles.setOnAction(buttonEvent);
 		bt_DetectNonUtf8.setOnAction(buttonEvent);
+		list_Result.setOnMouseClicked(new ListViewEvent());
 	}
 	
 	

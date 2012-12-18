@@ -2,8 +2,6 @@ package com.geekxx.utf8;
 
 import java.net.URL;
 
-import com.geekxx.utf8.view.AppRootView;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
