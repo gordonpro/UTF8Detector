@@ -7,9 +7,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="389.999977929685" prefWidth="481.9998779296875" xmlns:fx="http://javafx.com/fxml">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.999977929685" prefWidth="481.9998779296875" xmlns:fx="http://javafx.com/fxml">
   <children>
-    <VBox layoutX="0.0" layoutY="0.0" prefHeight="390.0" prefWidth="482.0">
+    <MenuBar id="main_menubar" layoutX="0.0" layoutY="0.0" minHeight="19.999908447265625" prefHeight="19.999908447265625" prefWidth="482.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="配置增强功能">
+          <items>
+            <MenuItem id="menuitem_notepad" mnemonicParsing="false" style="" text="Notepad++" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="帮助">
+          <items>
+            <MenuItem mnemonicParsing="false" text="关于" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <VBox layoutX="2.0" layoutY="32.0" prefHeight="390.0" prefWidth="482.0">
       <children>
         <HBox prefHeight="100.0" prefWidth="200.0">
           <children>
@@ -48,7 +62,7 @@
             </VBox>
           </children>
         </HBox>
-        <ListView id="main_list" prefHeight="290.0" prefWidth="482.0" />
+        <ListView id="main_list" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="290.0" prefWidth="479.9998779296875" />
       </children>
     </VBox>
   </children>

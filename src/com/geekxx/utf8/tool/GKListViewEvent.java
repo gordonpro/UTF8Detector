@@ -11,7 +11,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionModel;
 
-public class ListViewEvent implements EventHandler<Event> {
+public class GKListViewEvent implements EventHandler<Event> {
 	
 	/**
 	 * 记录最后一次点击的Item，用于决定是否是双击

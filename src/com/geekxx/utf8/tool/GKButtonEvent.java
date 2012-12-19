@@ -13,7 +13,7 @@ import javafx.stage.DirectoryChooser;
 
 import com.geekxx.utf8.AppMem;
 
-public class ButtonEvent implements EventHandler<ActionEvent>{
+public class GKButtonEvent implements EventHandler<ActionEvent>{
 	
 	AppMem mem = AppMem.getInstance();
 	

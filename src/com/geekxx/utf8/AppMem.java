@@ -4,14 +4,17 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 
-import com.geekxx.utf8.tool.ButtonEvent;
-import com.geekxx.utf8.tool.ListViewEvent;
+import com.geekxx.utf8.tool.GKButtonEvent;
+import com.geekxx.utf8.tool.GKMenuEvent;
+import com.geekxx.utf8.tool.GKListViewEvent;
 
 
 /**
@@ -21,7 +24,6 @@ import com.geekxx.utf8.tool.ListViewEvent;
 public class AppMem {
 	
 	
-	public Parent root;
 	
 	/**
 	 * 选择文件夹的按钮
@@ -61,7 +63,12 @@ public class AppMem {
 	/**
 	 * 按钮事件委托
 	 */
-	public ButtonEvent buttonEvent;
+	public GKButtonEvent buttonEvent;
+	
+	/**
+	 * 按钮事件委托
+	 */
+	public GKMenuEvent menuEvent;
 	
 	/**
 	 * 过滤结果装在里面
@@ -73,7 +80,21 @@ public class AppMem {
 	 */
 	public List<File> nonUtf8Files = null;
 	
+	/**
+	 * 菜单[配置Notepad++]
+	 */
+	public MenuItem mi_NotePad;
 	
+	/**
+	 * 菜单【关于】
+	 */
+	public MenuItem mi_About;
+	
+	/**
+	 * 初始化操作，把所有的控件和事件都初始化，并且绑定
+	 * @param s
+	 */
+	@SuppressWarnings("unchecked")
 	public void init(Scene s){
 		bt_ChooseDir = (Button) s.lookup("#main_bt_ChooseDir");
 		bt_ListFilteredFiles = (Button) s.lookup("#main_bt_ListFilteredFiles");
@@ -82,6 +103,12 @@ public class AppMem {
 		txtf_DirPath = (TextField) s.lookup("#main_txtf_ShowDir");
 		txtf_Filter = (TextField) s.lookup("#main_txtf_Filter");
 		list_Result = (ListView<String>) s.lookup("#main_list");
+		//初始化菜单
+		MenuBar menubar = (MenuBar) s.lookup("#main_menubar");
+		Menu menu0 = menubar.getMenus().get(0);//第一组
+		Menu menu1 = menubar.getMenus().get(1);//第2组
+		mi_NotePad = menu0.getItems().get(0);
+		mi_About = menu1.getItems().get(0);
 		bindEvent();
 		
 		filteredFiles = new ArrayList<>();
@@ -92,11 +119,16 @@ public class AppMem {
 	 * 初始化控件的绑定事件
 	 */
 	private void bindEvent(){
-		buttonEvent = new ButtonEvent();
+		buttonEvent = new GKButtonEvent();
+		menuEvent = new GKMenuEvent();
 		bt_ChooseDir.setOnAction(buttonEvent);
 		bt_ListFilteredFiles.setOnAction(buttonEvent);
 		bt_DetectNonUtf8.setOnAction(buttonEvent);
-		list_Result.setOnMouseClicked(new ListViewEvent());
+		list_Result.setOnMouseClicked(new GKListViewEvent());
+		
+		mi_NotePad.setOnAction(menuEvent);
+		mi_About.setOnAction(menuEvent);
+		
 	}
 	
 	

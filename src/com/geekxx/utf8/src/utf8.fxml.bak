@@ -7,25 +7,39 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="389.999977929685" prefWidth="481.9998779296875" xmlns:fx="http://javafx.com/fxml">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.999977929685" prefWidth="481.9998779296875" xmlns:fx="http://javafx.com/fxml">
   <children>
-    <VBox layoutX="0.0" layoutY="0.0" prefHeight="390.0" prefWidth="482.0">
+    <MenuBar layoutX="0.0" layoutY="0.0" minHeight="19.999908447265625" prefHeight="19.999908447265625" prefWidth="482.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="配置增强功能">
+          <items>
+            <MenuItem id="menuitem_notepad" mnemonicParsing="false" style="color:red" text="Notepad++" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="帮助">
+          <items>
+            <MenuItem mnemonicParsing="false" text="关于" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <VBox layoutX="2.0" layoutY="32.0" prefHeight="390.0" prefWidth="482.0">
       <children>
         <HBox prefHeight="100.0" prefWidth="200.0">
           <children>
             <GridPane alignment="CENTER" prefHeight="100.0" prefWidth="385.0">
               <children>
-                <TextField id="main_txtf_Filter" prefWidth="200.0" text="java" GridPane.columnIndex="1" GridPane.rowIndex="1"></TextField>
-                <TextField id="main_txtf_ShowDir"  prefWidth="200.0" GridPane.columnIndex="1" GridPane.margin="$x1" GridPane.rowIndex="0" />
+                <TextField id="main_txtf_Filter" prefWidth="200.0" text="java,class,txt,css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField id="main_txtf_ShowDir" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                 <Button id="main_bt_ChooseDir" mnemonicParsing="false" text="选择文件" GridPane.columnIndex="2" GridPane.rowIndex="0" />
                 <Button id="main_bt_ListFilteredFiles" mnemonicParsing="false" text="列出" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                 <Label text="文件夹" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <Label text="文件后缀：" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label text="过滤后缀(逗号隔开)" GridPane.columnIndex="0" GridPane.rowIndex="1" />
               </children>
               <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="179.0" minWidth="10.0" prefWidth="89.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="276.0" minWidth="10.0" prefWidth="263.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="179.0" minWidth="10.0" prefWidth="89.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="179.0" minWidth="10.0" prefWidth="107.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="276.0" minWidth="10.0" prefWidth="204.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="179.0" minWidth="10.0" prefWidth="69.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
@@ -48,7 +62,7 @@
             </VBox>
           </children>
         </HBox>
-        <ListView id="main_list" prefHeight="290.0" prefWidth="482.0" />
+        <ListView id="main_list" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="290.0" prefWidth="479.9998779296875" />
       </children>
     </VBox>
   </children>
