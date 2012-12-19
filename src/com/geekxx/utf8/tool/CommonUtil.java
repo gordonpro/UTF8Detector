@@ -3,9 +3,12 @@ package com.geekxx.utf8.tool;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
+import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
@@ -62,6 +65,10 @@ public class CommonUtil {
 	 * @param allFile 要检查的文件集合
 	 * @return 如果是UTF8就返回true
 	 */
+	/**
+	 * @param file
+	 * @return
+	 */
 	public static boolean  detectUTF8(File file){
 		try {
 			InputStream in = new FileInputStream(file);
@@ -83,5 +90,91 @@ public class CommonUtil {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	
+	
+	
+	/**
+	 * 检测Notepad++ 是否被配置
+	 */
+	public static void detectNotepad(){
+		String sysTmpDir = System.getProperty("java.io.tmpdir");
+		File iniFile = new File(sysTmpDir+File.separator+"utf8tool.ini");
+		if(iniFile.exists()){
+			Properties p = new Properties();
+			try {
+				InputStream in = new FileInputStream(iniFile);
+				p.load(in);
+				AppMem.getInstance().notepadPath = p.getProperty(AppMem.PROPERTY_NAME);
+				in.close();
+				File notepadEXE = new File(AppMem.getInstance().notepadPath);
+				//如果配置成功，不过Notepad++已经不存在，也要重新配置
+				if (!notepadEXE.exists()) {
+					mem.lb_Message.setText("Notepad++插件位置失效，请重新配置");
+					mem.lb_Message.setStyle("-fx-text-fill:red");
+				}
+				mem.popup.txtf_NotepadPath.setText(notepadEXE.getAbsolutePath());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else{
+			//不存在，需要重新配置,给出警告
+			mem.lb_Message.setText("检测到Notepad++未配置，效果会差很多");
+			mem.lb_Message.setStyle("-fx-text-fill:red");
+		}
+	}
+	
+	/**
+	 * 存储ini信息，notepad++的路径
+	 */
+	public static void storeProperty(){
+		//先获取用户选择
+		String notepadPath = mem.popup.txtf_NotepadPath.getText();
+		Properties p = new Properties();
+		p.put(AppMem.PROPERTY_NAME, notepadPath);
+		
+		///存储路径
+		//获取系统临时路径
+		String sysTmpDir = System.getProperty("java.io.tmpdir");
+		//建立文件
+		File iniFile = new File(sysTmpDir+File.separator+"utf8tool.ini");
+		//存放
+		try {
+			OutputStream out = new FileOutputStream(iniFile);
+			p.store(out, "UTF8转码工具---Geekxx.com");
+			out.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/**
+	 * 用notepad++打开文件
+	 * @param filepath 文件的路径
+	 */
+	public static void editInNotepad(String filepath){
+		
+		String cmd = mem.notepadPath+" "+filepath;
+		
+		try {
+			Runtime.getRuntime().exec(cmd);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 用notepad++打开文件
+	 * @param file 文件
+	 */
+	public static void editInNotepad(File file){
+		editInNotepad(file.getAbsolutePath());
 	}
 }

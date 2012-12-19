@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -15,6 +16,7 @@ import javafx.scene.control.TextField;
 import com.geekxx.utf8.tool.GKButtonEvent;
 import com.geekxx.utf8.tool.GKMenuEvent;
 import com.geekxx.utf8.tool.GKListViewEvent;
+import com.geekxx.utf8.view.PopupView;
 
 
 /**
@@ -24,6 +26,10 @@ import com.geekxx.utf8.tool.GKListViewEvent;
 public class AppMem {
 	
 	
+	/**
+	 * 在Properties中的名字
+	 */
+	public static final String PROPERTY_NAME = "plugin";
 	
 	/**
 	 * 选择文件夹的按钮
@@ -55,9 +61,19 @@ public class AppMem {
 	public TextField txtf_Filter;
 	
 	/**
+	 * 一个Label，上面显示一些提示信息
+	 */
+	public Label lb_Message;
+	
+	/**
 	 * 返回结果的ListView
 	 */
 	public ListView<String> list_Result;
+	
+	/**
+	 * 对话框布局<单实例>
+	 */
+	public PopupView popup;
 	
 	
 	/**
@@ -90,6 +106,45 @@ public class AppMem {
 	 */
 	public MenuItem mi_About;
 	
+	
+	/**
+	 * Notepad++的路径
+	 */
+	public String notepadPath;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * 初始化操作，把所有的控件和事件都初始化，并且绑定
 	 * @param s
@@ -109,6 +164,8 @@ public class AppMem {
 		Menu menu1 = menubar.getMenus().get(1);//第2组
 		mi_NotePad = menu0.getItems().get(0);
 		mi_About = menu1.getItems().get(0);
+		popup = PopupView.getInstance();
+		lb_Message = (Label) s.lookup("#label_message");
 		bindEvent();
 		
 		filteredFiles = new ArrayList<>();
@@ -125,7 +182,6 @@ public class AppMem {
 		bt_ListFilteredFiles.setOnAction(buttonEvent);
 		bt_DetectNonUtf8.setOnAction(buttonEvent);
 		list_Result.setOnMouseClicked(new GKListViewEvent());
-		
 		mi_NotePad.setOnAction(menuEvent);
 		mi_About.setOnAction(menuEvent);
 		

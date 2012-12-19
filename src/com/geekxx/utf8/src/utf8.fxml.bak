@@ -6,14 +6,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="422.999977929685" prefWidth="481.9998779296875" xmlns:fx="http://javafx.com/fxml">
   <children>
-    <MenuBar layoutX="0.0" layoutY="0.0" minHeight="19.999908447265625" prefHeight="19.999908447265625" prefWidth="482.0">
+    <MenuBar id="main_menubar" layoutX="0.0" layoutY="0.0" minHeight="19.999908447265625" prefHeight="19.999908447265625" prefWidth="482.0">
       <menus>
         <Menu mnemonicParsing="false" text="配置增强功能">
           <items>
-            <MenuItem id="menuitem_notepad" mnemonicParsing="false" style="color:red" text="Notepad++" />
+            <MenuItem id="menuitem_notepad" mnemonicParsing="false" style="" text="Notepad++" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="帮助">
@@ -23,11 +24,11 @@
         </Menu>
       </menus>
     </MenuBar>
-    <VBox layoutX="2.0" layoutY="32.0" prefHeight="390.0" prefWidth="482.0">
+    <VBox layoutX="2.0" layoutY="20.0" prefHeight="402.0" prefWidth="482.0">
       <children>
         <HBox prefHeight="100.0" prefWidth="200.0">
           <children>
-            <GridPane alignment="CENTER" prefHeight="100.0" prefWidth="385.0">
+            <GridPane alignment="CENTER" prefHeight="92.99990000000253" prefWidth="380.0">
               <children>
                 <TextField id="main_txtf_Filter" prefWidth="200.0" text="java,class,txt,css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TextField id="main_txtf_ShowDir" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
@@ -62,7 +63,19 @@
             </VBox>
           </children>
         </HBox>
-        <ListView id="main_list" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="290.0" prefWidth="479.9998779296875" />
+        <Label id="label_message" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="482.0" style="-fx-padding:2px  4px 2px 18px" text="结果栏">
+          <font>
+            <Font size="14.0" />
+          </font>
+          <VBox.margin>
+            <Insets />
+          </VBox.margin>
+        </Label>
+        <ListView id="main_list" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="283.0" prefWidth="474.0">
+          <VBox.margin>
+            <Insets left="2.0" right="6.0" />
+          </VBox.margin>
+        </ListView>
       </children>
     </VBox>
   </children>

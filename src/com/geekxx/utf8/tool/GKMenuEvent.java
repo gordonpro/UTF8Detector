@@ -1,12 +1,11 @@
 package com.geekxx.utf8.tool;
 
-import com.geekxx.utf8.AppMem;
-import com.geekxx.utf8.view.PopupView;
-
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventTarget;
+
+import com.geekxx.utf8.AppMem;
+import com.geekxx.utf8.view.PopupView;
 
 
 
@@ -34,7 +33,7 @@ public class GKMenuEvent implements EventHandler<ActionEvent> {
 		// TODO Auto-generated method stub
 		EventTarget target = event.getTarget();
 		if (target == mem.mi_NotePad ) {
-			popupView = new PopupView();
+			popupView = PopupView.getInstance();
 			popupView.show(mem.bt_ChooseDir.getScene().getWindow());
 		}
 		else if(target == mem.mi_About){

@@ -3,9 +3,6 @@ package com.geekxx.utf8.tool;
 import java.io.IOException;
 import java.util.Date;
 
-import com.sun.javafx.scene.control.skin.ListCellSkin;
-import com.sun.javafx.scene.control.skin.ListViewSkin;
-
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.ListView;
@@ -24,6 +21,7 @@ public class GKListViewEvent implements EventHandler<Event> {
 	long lastPressDate;
 	
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void handle(Event event) {
 		// TODO Auto-generated method stub
@@ -45,8 +43,9 @@ public class GKListViewEvent implements EventHandler<Event> {
 					fileAbsPath.lastIndexOf("\\") + 1);
 			// 打开所在的路径
 			try {
-				Runtime.getRuntime().exec("explorer " + path);
-			} catch (IOException e) {
+//				Runtime.getRuntime().exec("explorer " + path);
+				CommonUtil.editInNotepad(fileAbsPath);
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

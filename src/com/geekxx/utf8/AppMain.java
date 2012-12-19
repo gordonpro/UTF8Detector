@@ -2,6 +2,8 @@ package com.geekxx.utf8;
 
 import java.net.URL;
 
+import com.geekxx.utf8.tool.CommonUtil;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,6 +32,8 @@ public class AppMain extends Application{
 		//初始化所有控件
 		AppMem.getInstance().init(scene);
 		primaryStage.show();
+		//检测插件Notepad++
+		CommonUtil.detectNotepad();
 	}
-
+	
 }
