@@ -1,7 +1,9 @@
 ﻿package com.geekxx.utf8;
 
 import java.io.File;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javafx.scene.Scene;
@@ -37,15 +39,21 @@ public class AppMem {
 	 */
 	public Button bt_ChooseDir;
 	
+	
 	/**
 	 * 列出被过滤之后的文件列表
 	 */
 	public Button bt_ListFilteredFiles;
+	
 	/**
 	 *  检测非UTF8文件
 	 */
 	public Button bt_DetectNonUtf8;
 	
+	/**
+	 * 选择文件夹的按钮
+	 */
+	public Button bt_ConvertAll;
 	
 	/**
 	 * TextField文件路径
@@ -66,6 +74,13 @@ public class AppMem {
 	 * 返回结果的ListView
 	 */
 	public ListView<String> list_Result;
+	
+	
+	/**
+	 * 文件绝对路径和对应的Charset映射，用于自动转码时，找到该文件的检测过的Charset
+	 */
+	public HashMap<String, Charset> charsetMap = new HashMap<>();
+	
 	
 	/**
 	 * 对话框布局<单实例>
@@ -125,27 +140,6 @@ public class AppMem {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	/**
 	 * 初始化操作，把所有的控件和事件都初始化，并且绑定
 	 * @param s
@@ -155,6 +149,7 @@ public class AppMem {
 		bt_ChooseDir = (Button) s.lookup("#main_bt_ChooseDir");
 		bt_ListFilteredFiles = (Button) s.lookup("#main_bt_ListFilteredFiles");
 		bt_DetectNonUtf8 = (Button) s.lookup("#main_bt_DetectNonUTF8");
+		bt_ConvertAll = (Button) s.lookup("#main_bt_AllConvertUTF8");
 		txtf_DirPath = (TextField) s.lookup("#main_txtf_ShowDir");
 		txtf_Filter = (TextField) s.lookup("#main_txtf_Filter");
 		list_Result = (ListView<String>) s.lookup("#main_list");
@@ -183,6 +178,7 @@ public class AppMem {
 		bt_ChooseDir.setOnAction(buttonEvent);
 		bt_ListFilteredFiles.setOnAction(buttonEvent);
 		bt_DetectNonUtf8.setOnAction(buttonEvent);
+		bt_ConvertAll.setOnAction(buttonEvent);
 		list_Result.setOnMouseClicked(new GKListViewEvent());
 		mi_NotePad.setOnAction(menuEvent);
 		mi_About.setOnAction(menuEvent);

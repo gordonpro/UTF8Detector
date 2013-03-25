@@ -57,7 +57,7 @@
                     <Insets left="3.0" right="5.0" />
                   </VBox.margin>
                 </Button>
-                <Button id="main_bt_AllConvertUTF8" disable="true" font="$x1" graphicTextGap="4.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="97.0" text="全转" textFill="BLACK">
+                <Button id="main_bt_AllConvertUTF8" font="$x1" graphicTextGap="4.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="97.0" text="全转" textFill="BLACK">
                   <VBox.margin>
                     <Insets top="10.0" />
                   </VBox.margin>

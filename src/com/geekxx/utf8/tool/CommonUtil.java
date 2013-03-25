@@ -7,6 +7,7 @@ import info.monitorenter.cpdetector.io.JChardetFacade;
 import info.monitorenter.cpdetector.io.ParsingDetector;
 import info.monitorenter.cpdetector.io.UnicodeDetector;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -231,6 +232,36 @@ public class CommonUtil {
 			e.printStackTrace();
 		}
 		return charset;
+	}
+	
+	/**
+	 * 自动转码成UTF-8，这是个实验性的功能，暂时仅能支持ASCII和GBK**之类的编码
+	 * 转成UTF-8，其他的日本韩国等字符没有试验过
+	 * @param file 要转码的文件
+	 * @param charset 文件的原始格式
+	 * @throws IOException 转码过程中发生的IO异常
+	 * 
+	 */
+	public static final void autoConvert(File file) throws IOException{
+		
+		//  **先读取文件内容成字符串，一定要用原始编码格式 解读**
+		byte[] buffer = new byte[1024];
+		ByteArrayOutputStream bao = new ByteArrayOutputStream();
+		InputStream in = new FileInputStream(file);
+		int len = 0;
+		while((len=in.read(buffer))!=-1){
+			bao.write(buffer, 0, len);
+		}
+		//  文件字符串内容
+		String body = new String(bao.toByteArray(), Charset.forName("GB2312"));
+		//  关闭文件流 后面才能写
+		in.close();
+		bao.close();
+		
+		//  **写入转码好的内容覆盖到原文件**
+		OutputStream out = new FileOutputStream(file);
+		out.write(body.getBytes(Charset.forName("UTF-8")));
+		out.close();
 	}
 	
 	

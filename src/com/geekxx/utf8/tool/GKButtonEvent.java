@@ -1,8 +1,10 @@
 ﻿package com.geekxx.utf8.tool;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,6 +36,9 @@ public class GKButtonEvent implements EventHandler<ActionEvent>{
 		}
 		else if(target == mem.bt_ListFilteredFiles){
 			listFilteredFiles();
+		}
+		else if(target == mem.bt_ConvertAll){
+			convertAll();
 		}
 	}
 	
@@ -75,17 +80,48 @@ public class GKButtonEvent implements EventHandler<ActionEvent>{
 	private void listNonUTF8(){
 		//先列出文件
 		listFilteredFiles();
+		//  清空Charset映射, 因为新列出的要新重建
+		mem.charsetMap.clear();
 		ObservableList<String> nonUtf8files = FXCollections.observableArrayList();
 		for (File file : mem.filteredFiles) {
 			//  如果不是UTF8格式，就加入集合
 			Charset charset = CommonUtil.detectCharset(file);
 			//  如果Charset为null 或者不为"UTF-8" 都要加入修改列表 
 			if(charset==null || !"UTF-8".equals(charset.name())){
-				nonUtf8files.add(file.getAbsolutePath());
+				String path = file.getAbsolutePath();
+				//  映射字符集
+				mem.charsetMap.put(path, charset);
+				nonUtf8files.add(path);
 			}
 		}
 		mem.list_Result.setItems(nonUtf8files);
+		if(nonUtf8files.size()>0){
+			mem.bt_ConvertAll.setDisable(false);
+		}
 	}
 	
+	/**
+	 * 把列表中的文件全转成UTF-8
+	 */
+	private void convertAll(){
+		
+		
+		Set<String> keys = mem.charsetMap.keySet();
+		for (String key : keys) {
+			Charset charset = mem.charsetMap.get(key);
+			if(charset!=null){
+				try {
+					CommonUtil.autoConvert(new File(key));
+					System.out.println(key+"  ：  "+charset.name()+"转码成:UTF-8");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		mem.bt_ConvertAll.setDisable(true);
+		//  转码完毕之后 再次检测非UTF8文件
+		listNonUTF8();
+	}
 	
 }
