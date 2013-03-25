@@ -1,6 +1,7 @@
 ﻿package com.geekxx.utf8.tool;
 
 import java.io.File;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -52,7 +53,8 @@ public class GKButtonEvent implements EventHandler<ActionEvent>{
 	 * 列出过滤之后的文件
 	 */
 	private void listFilteredFiles(){
-		
+		//先清空上一次的缓存
+		mem.filteredFiles.clear();
 		//得到要过滤的条件
 		String ct = mem.txtf_Filter.getText().trim();
 		String[] subs = ct.split(",");
@@ -75,8 +77,10 @@ public class GKButtonEvent implements EventHandler<ActionEvent>{
 		listFilteredFiles();
 		ObservableList<String> nonUtf8files = FXCollections.observableArrayList();
 		for (File file : mem.filteredFiles) {
-			//如果不是UTF8格式，就加入集合
-			if(!CommonUtil.detectUTF8(file)){
+			//  如果不是UTF8格式，就加入集合
+			Charset charset = CommonUtil.detectCharset(file);
+			//  如果Charset为null 或者不为"UTF-8" 都要加入修改列表 
+			if(charset==null || !"UTF-8".equals(charset.name())){
 				nonUtf8files.add(file.getAbsolutePath());
 			}
 		}

@@ -7,5 +7,9 @@
 			<attribute name="javadoc_location" value="file:/E:/专用包/文档/JavaFx/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="libs/antlr-2.7.4.jar"/>
+	<classpathentry kind="lib" path="libs/chardet-1.0.jar"/>
+	<classpathentry kind="lib" path="libs/cpdetector_1.0.10.jar"/>
+	<classpathentry kind="lib" path="libs/jargs-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

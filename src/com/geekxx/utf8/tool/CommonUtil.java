@@ -1,5 +1,12 @@
 ﻿package com.geekxx.utf8.tool;
 
+import info.monitorenter.cpdetector.io.ASCIIDetector;
+import info.monitorenter.cpdetector.io.ByteOrderMarkDetector;
+import info.monitorenter.cpdetector.io.CodepageDetectorProxy;
+import info.monitorenter.cpdetector.io.JChardetFacade;
+import info.monitorenter.cpdetector.io.ParsingDetector;
+import info.monitorenter.cpdetector.io.UnicodeDetector;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,7 +14,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.List;
+import java.net.MalformedURLException;
+import java.nio.charset.Charset;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
@@ -21,6 +29,24 @@ import com.geekxx.utf8.AppMem;
  */
 public class CommonUtil {
 	
+	
+	/**
+	 * 第三方的一个文件编码检测器
+	 */
+	private static CodepageDetectorProxy detector = CodepageDetectorProxy.getInstance();
+	
+	//  初始化检测器, 等于是增强检测器
+	static{
+		detector.add(new ByteOrderMarkDetector()); 
+	    // The first instance delegated to tries to detect the meta charset attribut in html pages.
+	    detector.add(new ParsingDetector(true)); // be verbose about parsing.
+	    // This one does the tricks of exclusion and frequency detection, if first implementation is 
+	    // unsuccessful:
+	    detector.add(JChardetFacade.getInstance()); // Another singleton.
+	    detector.add(ASCIIDetector.getInstance()); // Fallbac
+	    detector.add(UnicodeDetector.getInstance());
+	}
+	
 	private static AppMem mem = AppMem.getInstance();
 	
 	/**
@@ -30,8 +56,7 @@ public class CommonUtil {
 	 * @return 返回一个集合，内容是符合条件的文件
 	 */
 	public static void filterFilesWithPath(File path,String[] filter){
-		//先清空上一次的缓存
-		mem.filteredFiles.clear();
+		
 		//如果文件不存在，返回
 		if (!path.exists()) {
 			return;
@@ -180,7 +205,7 @@ public class CommonUtil {
 	}
 	
 	
-	
+	@Deprecated
 	public static void authorize(){
 		while(true){
 			String input = JOptionPane.showInputDialog("你是？");
@@ -189,4 +214,24 @@ public class CommonUtil {
 			}
 		}
 	}
+	
+	
+	/**
+	 * 检测文件编码，新的方法。加入了几个牛逼的lib实现了检测无BOM的UTF-8
+	 * @param file 被检测文件
+	 * @return 返回字符编码
+	 */
+	public static Charset detectCharset(File file){
+		Charset charset = null;
+		try {
+			charset = detector.detectCodepage(file.toURI().toURL());
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return charset;
+	}
+	
+	
 }
