@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -33,7 +33,7 @@
                 <TextField id="main_txtf_Filter" prefWidth="200.0" text="java,txt,css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TextField id="main_txtf_ShowDir" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                 <Button id="main_bt_ChooseDir" mnemonicParsing="false" text="选择文件" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-                <Button id="main_bt_ListFilteredFiles" mnemonicParsing="false" text="列出" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <Button id="main_bt_ListFilteredFiles" mnemonicParsing="false" text="列出文件" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                 <Label text="文件夹" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                 <Label text="过滤后缀(逗号隔开)" GridPane.columnIndex="0" GridPane.rowIndex="1" />
               </children>
@@ -49,14 +49,12 @@
             </GridPane>
             <VBox alignment="CENTER" prefHeight="100.0" prefWidth="108.0">
               <children>
-                <Button id="main_bt_DetectNonUTF8" mnemonicParsing="false" prefHeight="30.0" prefWidth="97.0" text="检测非UTF-8">
+                <Button id="main_bt_DetectNonUTF8" graphicTextGap="4.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="97.0" text="检测非UTF-8" textFill="BLACK">
+                  <font>
+                    <Font size="12.0" />
+                  </font>
                   <VBox.margin>
-                    <Insets left="3.0" right="3.0" />
-                  </VBox.margin>
-                </Button>
-                <Button id="main_bt_Convert2UTF8" mnemonicParsing="false" prefHeight="30.0" prefWidth="97.0" text="转成UTF-8">
-                  <VBox.margin>
-                    <Insets top="2.0" />
+                    <Insets left="3.0" right="5.0" />
                   </VBox.margin>
                 </Button>
               </children>
@@ -71,7 +69,7 @@
             <Insets />
           </VBox.margin>
         </Label>
-        <ListView id="main_list" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="283.0" prefWidth="474.0">
+        <ListView id="main_list" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="283.0" prefWidth="467.0">
           <VBox.margin>
             <Insets left="2.0" right="6.0" />
           </VBox.margin>

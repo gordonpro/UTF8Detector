@@ -1,4 +1,4 @@
-package com.geekxx.utf8;
+ï»¿package com.geekxx.utf8;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 
 import com.geekxx.utf8.tool.GKButtonEvent;
 import com.geekxx.utf8.tool.GKMenuEvent;
@@ -20,95 +21,95 @@ import com.geekxx.utf8.view.PopupView;
 
 
 /**
- * È«¾ÖµÄ±äÁ¿´æ·Å,±¾ÀàÖ»·ÅÒıÓÃ
+ * å…¨å±€çš„å˜é‡å­˜æ”¾,æœ¬ç±»åªæ”¾å¼•ç”¨
  * @author Gordon
  */
 public class AppMem {
 	
 	
 	/**
-	 * ÔÚPropertiesÖĞµÄÃû×Ö
+	 * åœ¨Propertiesä¸­çš„åå­—
 	 */
 	public static final String PROPERTY_NAME = "plugin";
 	
 	/**
-	 * Ñ¡ÔñÎÄ¼ş¼ĞµÄ°´Å¥
+	 * é€‰æ‹©æ–‡ä»¶å¤¹çš„æŒ‰é’®
 	 */
 	public Button bt_ChooseDir;
 	
 	/**
-	 * ÁĞ³ö±»¹ıÂËÖ®ºóµÄÎÄ¼şÁĞ±í
+	 * åˆ—å‡ºè¢«è¿‡æ»¤ä¹‹åçš„æ–‡ä»¶åˆ—è¡¨
 	 */
 	public Button bt_ListFilteredFiles;
 	/**
-	 *  ¼ì²â·ÇUTF8ÎÄ¼ş
+	 *  æ£€æµ‹éUTF8æ–‡ä»¶
 	 */
 	public Button bt_DetectNonUtf8;
-	/**
-	 * ×ª³ÉUTF8°´Å¥
-	 */
-	public Button bt_Convert2Utf8;
 	
 	
 	/**
-	 * TextFieldÎÄ¼şÂ·¾¶
+	 * TextFieldæ–‡ä»¶è·¯å¾„
 	 */
 	public TextField txtf_DirPath;
 	
 	/**
-	 * TextField¹ıÂËºó×º
+	 * TextFieldè¿‡æ»¤åç¼€
 	 */
 	public TextField txtf_Filter;
 	
 	/**
-	 * Ò»¸öLabel£¬ÉÏÃæÏÔÊ¾Ò»Ğ©ÌáÊ¾ĞÅÏ¢
+	 * ä¸€ä¸ªLabelï¼Œä¸Šé¢æ˜¾ç¤ºä¸€äº›æç¤ºä¿¡æ¯
 	 */
 	public Label lb_Message;
 	
 	/**
-	 * ·µ»Ø½á¹ûµÄListView
+	 * è¿”å›ç»“æœçš„ListView
 	 */
 	public ListView<String> list_Result;
 	
 	/**
-	 * ¶Ô»°¿ò²¼¾Ö<µ¥ÊµÀı>
+	 * å¯¹è¯æ¡†å¸ƒå±€<å•å®ä¾‹>
 	 */
 	public PopupView popup;
 	
+	/**
+	 * æç¤ºè´´
+	 */
+	public Tooltip tooltip ;
 	
 	/**
-	 * °´Å¥ÊÂ¼şÎ¯ÍĞ
+	 * æŒ‰é’®äº‹ä»¶å§”æ‰˜
 	 */
 	public GKButtonEvent buttonEvent;
 	
 	/**
-	 * °´Å¥ÊÂ¼şÎ¯ÍĞ
+	 * æŒ‰é’®äº‹ä»¶å§”æ‰˜
 	 */
 	public GKMenuEvent menuEvent;
 	
 	/**
-	 * ¹ıÂË½á¹û×°ÔÚÀïÃæ
+	 * è¿‡æ»¤ç»“æœè£…åœ¨é‡Œé¢
 	 */
-	public List<File> filteredFiles = null;
+	public List<File> filteredFiles = new ArrayList<File>();
 	
 	/**
-	 * ·ÇUTF8ÎÄ¼ş×°ÔÚÀïÃæ
+	 * éUTF8æ–‡ä»¶è£…åœ¨é‡Œé¢
 	 */
 	public List<File> nonUtf8Files = null;
 	
 	/**
-	 * ²Ëµ¥[ÅäÖÃNotepad++]
+	 * èœå•[é…ç½®Notepad++]
 	 */
 	public MenuItem mi_NotePad;
 	
 	/**
-	 * ²Ëµ¥¡¾¹ØÓÚ¡¿
+	 * èœå•ã€å…³äºã€‘
 	 */
 	public MenuItem mi_About;
 	
 	
 	/**
-	 * Notepad++µÄÂ·¾¶
+	 * Notepad++çš„è·¯å¾„
 	 */
 	public String notepadPath;
 	
@@ -146,7 +147,7 @@ public class AppMem {
 	
 	
 	/**
-	 * ³õÊ¼»¯²Ù×÷£¬°ÑËùÓĞµÄ¿Ø¼şºÍÊÂ¼ş¶¼³õÊ¼»¯£¬²¢ÇÒ°ó¶¨
+	 * åˆå§‹åŒ–æ“ä½œï¼ŒæŠŠæ‰€æœ‰çš„æ§ä»¶å’Œäº‹ä»¶éƒ½åˆå§‹åŒ–ï¼Œå¹¶ä¸”ç»‘å®š
 	 * @param s
 	 */
 	@SuppressWarnings("unchecked")
@@ -154,18 +155,19 @@ public class AppMem {
 		bt_ChooseDir = (Button) s.lookup("#main_bt_ChooseDir");
 		bt_ListFilteredFiles = (Button) s.lookup("#main_bt_ListFilteredFiles");
 		bt_DetectNonUtf8 = (Button) s.lookup("#main_bt_DetectNonUTF8");
-		bt_Convert2Utf8 = (Button) s.lookup("#main_bt_Convert2UTF8");
 		txtf_DirPath = (TextField) s.lookup("#main_txtf_ShowDir");
 		txtf_Filter = (TextField) s.lookup("#main_txtf_Filter");
 		list_Result = (ListView<String>) s.lookup("#main_list");
-		//³õÊ¼»¯²Ëµ¥
+		//åˆå§‹åŒ–èœå•
 		MenuBar menubar = (MenuBar) s.lookup("#main_menubar");
-		Menu menu0 = menubar.getMenus().get(0);//µÚÒ»×é
-		Menu menu1 = menubar.getMenus().get(1);//µÚ2×é
+		Menu menu0 = menubar.getMenus().get(0);//ç¬¬ä¸€ç»„
+		Menu menu1 = menubar.getMenus().get(1);//ç¬¬2ç»„
 		mi_NotePad = menu0.getItems().get(0);
 		mi_About = menu1.getItems().get(0);
 		popup = PopupView.getInstance();
 		lb_Message = (Label) s.lookup("#label_message");
+		tooltip = new Tooltip();
+		
 		bindEvent();
 		
 		filteredFiles = new ArrayList<>();
@@ -173,7 +175,7 @@ public class AppMem {
 	}
 	
 	/**
-	 * ³õÊ¼»¯¿Ø¼şµÄ°ó¶¨ÊÂ¼ş
+	 * åˆå§‹åŒ–æ§ä»¶çš„ç»‘å®šäº‹ä»¶
 	 */
 	private void bindEvent(){
 		buttonEvent = new GKButtonEvent();

@@ -1,4 +1,4 @@
-package com.geekxx.utf8.tool;
+ï»¿package com.geekxx.utf8.tool;
 
 import java.io.File;
 import java.util.List;
@@ -24,11 +24,12 @@ public class GKButtonEvent implements EventHandler<ActionEvent>{
 		if (target == mem.bt_ChooseDir) {
 			handleChooseDir();
 		}
-		else if (target == mem.bt_Convert2Utf8){
-			
-		}
 		else if(target == mem.bt_DetectNonUtf8){
 			listNonUTF8();
+			//åŠ å…¥tips
+			mem.list_Result.setTooltip(null);
+			mem.list_Result.setTooltip(mem.tooltip);
+			mem.tooltip.setText("åŒå‡»æ‰“å¼€");
 		}
 		else if(target == mem.bt_ListFilteredFiles){
 			listFilteredFiles();
@@ -37,43 +38,44 @@ public class GKButtonEvent implements EventHandler<ActionEvent>{
 	
 	
 	/**
-	 * ÄÚ²¿²ßÂÔ£¬µ¯³öÑ¡ÔñÄ¿Â¼¶Ô»°¿ò
+	 * å†…éƒ¨ç­–ç•¥ï¼Œå¼¹å‡ºé€‰æ‹©ç›®å½•å¯¹è¯æ¡†
 	 */
 	private void handleChooseDir(){
 		DirectoryChooser dirChooser = new DirectoryChooser();
 		File path = dirChooser.showDialog(null);
-		mem.txtf_DirPath.setText(path.getAbsolutePath());
+		if(path!=null){
+			mem.txtf_DirPath.setText(path.getAbsolutePath());
+		}
 	}
 	
 	/**
-	 * ÁĞ³ö¹ıÂËÖ®ºóµÄÎÄ¼ş
+	 * åˆ—å‡ºè¿‡æ»¤ä¹‹åçš„æ–‡ä»¶
 	 */
 	private void listFilteredFiles(){
-		//ÏÈÇå¿ÕÉÏÒ»´ÎµÄ»º´æ
-		mem.filteredFiles.clear();
-		//µÃµ½Òª¹ıÂËµÄÌõ¼ş
+		
+		//å¾—åˆ°è¦è¿‡æ»¤çš„æ¡ä»¶
 		String ct = mem.txtf_Filter.getText().trim();
 		String[] subs = ct.split(",");
-		//µÃµ½Ö¸¶¨µÄÂ·¾¶
+		//å¾—åˆ°æŒ‡å®šçš„è·¯å¾„
 		String path = mem.txtf_DirPath.getText().trim();
-		
-		List<File> files = CommonUtil.getFilesWithPath(new File(path), subs);
+		//  å¾—åˆ°ç¬¦åˆè¦æ±‚çš„æ–‡ä»¶ç»“åˆï¼Œå‡†å¤‡åšéå†è½¬ç äº†
+		CommonUtil.filterFilesWithPath(new File(path), subs);
 		ObservableList<String> filePathes = FXCollections.observableArrayList();
-		for (File file : files) {
+		for (File file : mem.filteredFiles) {
 			filePathes.add(file.getAbsolutePath());
 		}
 		mem.list_Result.setItems(filePathes);
 	}
 	
 	/**
-	 * ÁĞ³ö´øBOMµÄUTF8ÎÄ¼ş
+	 * åˆ—å‡ºå¸¦BOMçš„UTF8æ–‡ä»¶
 	 */
 	private void listNonUTF8(){
-		//ÏÈÁĞ³öÎÄ¼ş
+		//å…ˆåˆ—å‡ºæ–‡ä»¶
 		listFilteredFiles();
 		ObservableList<String> nonUtf8files = FXCollections.observableArrayList();
 		for (File file : mem.filteredFiles) {
-			//Èç¹û²»ÊÇUTF8¸ñÊ½£¬¾Í¼ÓÈë¼¯ºÏ
+			//å¦‚æœä¸æ˜¯UTF8æ ¼å¼ï¼Œå°±åŠ å…¥é›†åˆ
 			if(!CommonUtil.detectUTF8(file)){
 				nonUtf8files.add(file.getAbsolutePath());
 			}
@@ -81,8 +83,5 @@ public class GKButtonEvent implements EventHandler<ActionEvent>{
 		mem.list_Result.setItems(nonUtf8files);
 	}
 	
-	private void handleCoverUtf8(){
-		
-	}
 	
 }

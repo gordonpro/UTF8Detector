@@ -1,6 +1,5 @@
-package com.geekxx.utf8.tool;
+ï»¿package com.geekxx.utf8.tool;
 
-import java.io.IOException;
 import java.util.Date;
 
 import javafx.event.Event;
@@ -11,12 +10,12 @@ import javafx.scene.control.SelectionModel;
 public class GKListViewEvent implements EventHandler<Event> {
 	
 	/**
-	 * ¼ÇÂ¼×îºóÒ»´Îµã»÷µÄItem£¬ÓÃÓÚ¾ö¶¨ÊÇ·ñÊÇË«»÷
+	 * è®°å½•æœ€åä¸€æ¬¡ç‚¹å‡»çš„Itemï¼Œç”¨äºå†³å®šæ˜¯å¦æ˜¯åŒå‡»
 	 */
 	int lastPressIndex = -1;
 	
 	/**
-	 * ¼ÇÂ¼×îºóÒ»´Îµã»÷µÄÊ±¼ä£¬Èç¹û³¬¹ı500ms ¾Í²»ËãÊÇË«»÷
+	 * è®°å½•æœ€åä¸€æ¬¡ç‚¹å‡»çš„æ—¶é—´ï¼Œå¦‚æœè¶…è¿‡500ms å°±ä¸ç®—æ˜¯åŒå‡»
 	 */
 	long lastPressDate;
 	
@@ -26,7 +25,7 @@ public class GKListViewEvent implements EventHandler<Event> {
 	public void handle(Event event) {
 		// TODO Auto-generated method stub
 		
-		//Èç¹ûÊ±¼ä¼ä¸ô´óÓÚÁË0.5Ãë£¬²»ÏìÓ¦
+		//å¦‚æœæ—¶é—´é—´éš”å¤§äºäº†0.5ç§’ï¼Œä¸å“åº”
 		long now = new Date().getTime();
 		ListView<String> list = (ListView<String>) event.getSource();
 		SelectionModel<String> sm = list.getSelectionModel();
@@ -39,9 +38,7 @@ public class GKListViewEvent implements EventHandler<Event> {
 		
 		if (lastPressIndex == sm.getSelectedIndex()) {
 			String fileAbsPath = list.getSelectionModel().getSelectedItem();
-			String path = fileAbsPath.substring(0,
-					fileAbsPath.lastIndexOf("\\") + 1);
-			// ´ò¿ªËùÔÚµÄÂ·¾¶
+			// æ‰“å¼€æ‰€åœ¨çš„è·¯å¾„
 			try {
 //				Runtime.getRuntime().exec("explorer " + path);
 				CommonUtil.editInNotepad(fileAbsPath);

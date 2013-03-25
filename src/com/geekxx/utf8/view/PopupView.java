@@ -1,4 +1,4 @@
-package com.geekxx.utf8.view;
+ï»¿package com.geekxx.utf8.view;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -26,22 +26,22 @@ import com.geekxx.utf8.tool.CommonUtil;
 public class PopupView extends Popup{
 	
 	/**
-	 * ¶Ô»°¿òµÄ¸ù²¼¾Ö
+	 * å¯¹è¯æ¡†çš„æ ¹å¸ƒå±€
 	 */
 	public Parent root;
 	
 	/**
-	 * ÆÁÄ»¿í¸ß
+	 * å±å¹•å®½é«˜
 	 */
 	int sw,sh;
 	
 	/**
-	 * ¶Ô»°¿òÉÏÃæµÄ3¸ö°´Å¥ ¡¾È·¶¨¡¿¡¾È¡Ïû¡¿¡¾¶¨Î»NotePad++²å¼ş¡¿
+	 * å¯¹è¯æ¡†ä¸Šé¢çš„3ä¸ªæŒ‰é’® ã€ç¡®å®šã€‘ã€å–æ¶ˆã€‘ã€å®šä½NotePad++æ’ä»¶ã€‘
 	 */
 	public Button bt_Positive,bt_Negative,bt_LocationNotepad;
 	
 	/**
-	 * ÏÔÊ¾Nodepad++µÄ¶¨Î»Â·¾¶
+	 * æ˜¾ç¤ºNodepad++çš„å®šä½è·¯å¾„
 	 */
 	public TextField txtf_NotepadPath;
 	
@@ -51,14 +51,14 @@ public class PopupView extends Popup{
 	private PopupView() {
 		// TODO Auto-generated constructor stub
 		URL url = AppMain.class.getResource("/com/geekxx/utf8/src/popup.fxml");
-		//»ñÈ¡ÆÁÄ»¿í¸ß£¬ÎªÁË¶¨Î»µ½ÖĞ¼ä
+		//è·å–å±å¹•å®½é«˜ï¼Œä¸ºäº†å®šä½åˆ°ä¸­é—´
 		Dimension dm = Toolkit.getDefaultToolkit().getScreenSize();
 		sw = dm.width;
 		sh = dm.height;
 		try {
 			root = FXMLLoader.load(url);
 			getContent().add(root);
-			initNode();//×Ô¼ºµÄ·½·¨£¬³õÊ¼»¯¿Ø¼ş
+			initNode();//è‡ªå·±çš„æ–¹æ³•ï¼Œåˆå§‹åŒ–æ§ä»¶
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,7 +66,7 @@ public class PopupView extends Popup{
 	}
 	
 	/**
-	 * ³õÊ¼»¯Ò»Ğ©¿Ø¼ş£¬ºÍ°ó¶¨ËûÃÇµÄÊÂ¼ş
+	 * åˆå§‹åŒ–ä¸€äº›æ§ä»¶ï¼Œå’Œç»‘å®šä»–ä»¬çš„äº‹ä»¶
 	 */
 	private void initNode(){
 		txtf_NotepadPath = (TextField) root.lookup("#popup_txtf_notepadpath");
@@ -74,7 +74,7 @@ public class PopupView extends Popup{
 		bt_Negative =  (Button) root.lookup("#popup_bt_negative");
 		bt_Positive =  (Button) root.lookup("#popup_bt_positive");
 		
-		//°ó¶¨ÊÂ¼ş
+		//ç»‘å®šäº‹ä»¶
 		bt_LocationNotepad.setOnAction(btnEvent);
 		bt_Negative.setOnAction(btnEvent);
 		bt_Positive.setOnAction(btnEvent);
@@ -85,7 +85,7 @@ public class PopupView extends Popup{
 	public void show(Window owner) {
 		// TODO Auto-generated method stub
 		
-		//ÎªÁË¹Ì¶¨µ½ÖĞ¼ä£¬ÏÈÒş²ØÏÔÊ¾£¬ÔÙ¼ÆËã£¬ÔÙÏÔÊ¾
+		//ä¸ºäº†å›ºå®šåˆ°ä¸­é—´ï¼Œå…ˆéšè—æ˜¾ç¤ºï¼Œå†è®¡ç®—ï¼Œå†æ˜¾ç¤º
 		root.setVisible(false);
 		super.show(owner);
 		Bounds bounds = root.getLayoutBounds();
@@ -109,7 +109,7 @@ public class PopupView extends Popup{
 	}
 	
 	/**
-	 * ÄÚ²¿ÊÂ¼ş´¦ÀíÆ÷
+	 * å†…éƒ¨äº‹ä»¶å¤„ç†å™¨
 	 */
 	private EventHandler<ActionEvent> btnEvent = new EventHandler<ActionEvent>() {
 		
@@ -119,7 +119,7 @@ public class PopupView extends Popup{
 			EventTarget target = event.getTarget();
 			if (target==bt_LocationNotepad) {
 				FileChooser chooser = new FileChooser();
-				//ÉèÖÃÎÄ¼şÑ¡Ôñ¹ıÂËÆ÷
+				//è®¾ç½®æ–‡ä»¶é€‰æ‹©è¿‡æ»¤å™¨
 				FileChooser.ExtensionFilter filter = new ExtensionFilter("notepad++", "notepad++.exe");
 				chooser.getExtensionFilters().add(filter);
 				File file = chooser.showOpenDialog(root.getScene().getWindow());
@@ -131,12 +131,12 @@ public class PopupView extends Popup{
 				hide();
 			}
 			else if(target==bt_Positive){
-				//±£´æÅäÖÃÎÄ¼ş
+				//ä¿å­˜é…ç½®æ–‡ä»¶
 				CommonUtil.storeProperty();
-				//ÔÙ´Î¼ì²â
+				//å†æ¬¡æ£€æµ‹
 				File f = new File(txtf_NotepadPath.getText());
 				if (f.exists()) {
-					AppMem.getInstance().lb_Message.setText("ÅäÖÃ³É¹¦");
+					AppMem.getInstance().lb_Message.setText("é…ç½®æˆåŠŸ");
 				}
 				CommonUtil.detectNotepad();
 				hide();

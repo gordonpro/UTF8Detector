@@ -1,4 +1,4 @@
-package com.geekxx.utf8.tool;
+ï»¿package com.geekxx.utf8.tool;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,7 +16,7 @@ import com.geekxx.utf8.AppMem;
 
 
 /**
- * ¹«¹²Àà£¬ºÜ¶à³£ÓÃµÄ·½·¨·â×°
+ * å…¬å…±ç±»ï¼Œå¾ˆå¤šå¸¸ç”¨çš„æ–¹æ³•å°è£…
  * @author Gordon
  */
 public class CommonUtil {
@@ -24,31 +24,34 @@ public class CommonUtil {
 	private static AppMem mem = AppMem.getInstance();
 	
 	/**
-	 * ´ÓÖ¸¶¨Ä¿Â¼ÖĞ»ñÈ¡ËùÓĞµÄÎÄ¼ş£¬°üÀ¨×ÓÄ¿Â¼ÖĞ£¬ÎŞÏŞµİ¹é
-	 * @param path Ö¸¶¨µÄÂ·¾¶(Ä¿Â¼)µÄFileĞÎÊ½
-	 * @return ·µ»ØÒ»¸ö¼¯ºÏ£¬ÄÚÈİÊÇ·ûºÏÌõ¼şµÄÎÄ¼ş
+	 * ä»æŒ‡å®šç›®å½•ä¸­è·å–æ‰€æœ‰çš„æ–‡ä»¶ï¼ŒåŒ…æ‹¬å­ç›®å½•ä¸­ï¼Œæ— é™é€’å½’
+	 * @param path æŒ‡å®šçš„è·¯å¾„(ç›®å½•)çš„Fileå½¢å¼
+	 * @param filter è¿‡æ»¤æ¡ä»¶
+	 * @return è¿”å›ä¸€ä¸ªé›†åˆï¼Œå†…å®¹æ˜¯ç¬¦åˆæ¡ä»¶çš„æ–‡ä»¶
 	 */
-	public static List<File> getFilesWithPath(File path,String[] filter){
-		//Èç¹ûÎÄ¼ş²»´æÔÚ£¬·µ»Ø
+	public static void filterFilesWithPath(File path,String[] filter){
+		//å…ˆæ¸…ç©ºä¸Šä¸€æ¬¡çš„ç¼“å­˜
+		mem.filteredFiles.clear();
+		//å¦‚æœæ–‡ä»¶ä¸å­˜åœ¨ï¼Œè¿”å›
 		if (!path.exists()) {
-			return null;
+			return;
 		}
-		//ÁĞ³öµ±Ç°ÎÄ¼ş¼ĞµÄËùÓĞÄÚÈİ
+		//åˆ—å‡ºå½“å‰æ–‡ä»¶å¤¹çš„æ‰€æœ‰å†…å®¹
 		File[] temps = path.listFiles();
-		//±éÀú
+		//éå†
 		for (File file : temps) {
-			//Èç¹ûÎÄ¼şÊÇ¸öÄ¿Â¼£¬ÄÇÃ´µİ¹é
+			//å¦‚æœæ–‡ä»¶æ˜¯ä¸ªç›®å½•ï¼Œé‚£ä¹ˆé€’å½’
 			if(file.isDirectory()){
-				getFilesWithPath(file,filter);
+				filterFilesWithPath(file,filter);
 			}
-			//Èç¹ûÊÇÎÄ¼ş£¬ÄÇÃ´¹ıÂË
+			//å¦‚æœæ˜¯æ–‡ä»¶ï¼Œé‚£ä¹ˆè¿‡æ»¤æ¡ä»¶
 			else{
 				String name = file.getName();
-				//µÃµ½ºó×ºÃû
+				//å¾—åˆ°åç¼€å
 				int last = name.lastIndexOf(".");
 				String suffix = name.substring(last+1, name.length());
 				
-				//±éÀú¹ıÂËÄÚÈİ£¬·ûºÏÌõ¼şµÄ¼ÓÈëÈİÆ÷
+				//éå†è¿‡æ»¤å†…å®¹ï¼Œç¬¦åˆæ¡ä»¶çš„åŠ å…¥å®¹å™¨
 				for (String f : filter) {
 					if(f.equals(suffix)){
 						mem.filteredFiles.add(file);
@@ -57,15 +60,13 @@ public class CommonUtil {
 			}
 		}
 		
-		return mem.filteredFiles;
 	}
 
 	/**
-	 * ¼ì²âÎÄ¼şÊÇ·ñÊÇUTF8 Ö»ÄÜ¼ì²é³ö´øBOMµÄUTF8
-	 * @param allFile Òª¼ì²éµÄÎÄ¼ş¼¯ºÏ
-	 * @return Èç¹ûÊÇUTF8¾Í·µ»Øtrue
-	 */
-	/**
+	 * æ£€æµ‹æ–‡ä»¶æ˜¯å¦æ˜¯UTF8 åªèƒ½æ£€æŸ¥å‡ºå¸¦BOMçš„UTF8
+	 * @param allFile è¦æ£€æŸ¥çš„æ–‡ä»¶é›†åˆ
+	 * @return å¦‚æœæ˜¯UTF8å°±è¿”å›true
+	 *
 	 * @param file
 	 * @return
 	 */
@@ -79,12 +80,12 @@ public class CommonUtil {
 				return true;
 			}
 			else{
-				System.out.println(file.getAbsolutePath()+"²»ÊÇutf8");
+				System.out.println(file.getAbsolutePath()+"ä¸æ˜¯utf8");
 				return false;
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			JOptionPane.showConfirmDialog(null, file.getAbsolutePath()+"²»´æÔÚ");
+			JOptionPane.showConfirmDialog(null, file.getAbsolutePath()+"ä¸å­˜åœ¨");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,7 +97,7 @@ public class CommonUtil {
 	
 	
 	/**
-	 * ¼ì²âNotepad++ ÊÇ·ñ±»ÅäÖÃ
+	 * æ£€æµ‹Notepad++ æ˜¯å¦è¢«é…ç½®
 	 */
 	public static void detectNotepad(){
 		String sysTmpDir = System.getProperty("java.io.tmpdir");
@@ -109,9 +110,9 @@ public class CommonUtil {
 				AppMem.getInstance().notepadPath = p.getProperty(AppMem.PROPERTY_NAME);
 				in.close();
 				File notepadEXE = new File(AppMem.getInstance().notepadPath);
-				//Èç¹ûÅäÖÃ³É¹¦£¬²»¹ıNotepad++ÒÑ¾­²»´æÔÚ£¬Ò²ÒªÖØĞÂÅäÖÃ
+				//å¦‚æœé…ç½®æˆåŠŸï¼Œä¸è¿‡Notepad++å·²ç»ä¸å­˜åœ¨ï¼Œä¹Ÿè¦é‡æ–°é…ç½®
 				if (!notepadEXE.exists()) {
-					mem.lb_Message.setText("Notepad++²å¼şÎ»ÖÃÊ§Ğ§£¬ÇëÖØĞÂÅäÖÃ");
+					mem.lb_Message.setText("Notepad++æ’ä»¶ä½ç½®å¤±æ•ˆï¼Œè¯·é‡æ–°é…ç½®");
 					mem.lb_Message.setStyle("-fx-text-fill:red");
 				}
 				mem.popup.txtf_NotepadPath.setText(notepadEXE.getAbsolutePath());
@@ -121,30 +122,30 @@ public class CommonUtil {
 			}
 		}
 		else{
-			//²»´æÔÚ£¬ĞèÒªÖØĞÂÅäÖÃ,¸ø³ö¾¯¸æ
-			mem.lb_Message.setText("¼ì²âµ½Notepad++Î´ÅäÖÃ£¬Ğ§¹û»á²îºÜ¶à");
+			//ä¸å­˜åœ¨ï¼Œéœ€è¦é‡æ–°é…ç½®,ç»™å‡ºè­¦å‘Š
+			mem.lb_Message.setText("æ£€æµ‹åˆ°Notepad++æœªé…ç½®ï¼Œæ•ˆæœä¼šå·®å¾ˆå¤š");
 			mem.lb_Message.setStyle("-fx-text-fill:red");
 		}
 	}
 	
 	/**
-	 * ´æ´¢iniĞÅÏ¢£¬notepad++µÄÂ·¾¶
+	 * å­˜å‚¨iniä¿¡æ¯ï¼Œnotepad++çš„è·¯å¾„
 	 */
 	public static void storeProperty(){
-		//ÏÈ»ñÈ¡ÓÃ»§Ñ¡Ôñ
+		//å…ˆè·å–ç”¨æˆ·é€‰æ‹©
 		String notepadPath = mem.popup.txtf_NotepadPath.getText();
 		Properties p = new Properties();
 		p.put(AppMem.PROPERTY_NAME, notepadPath);
 		
-		///´æ´¢Â·¾¶
-		//»ñÈ¡ÏµÍ³ÁÙÊ±Â·¾¶
+		///å­˜å‚¨è·¯å¾„
+		//è·å–ç³»ç»Ÿä¸´æ—¶è·¯å¾„
 		String sysTmpDir = System.getProperty("java.io.tmpdir");
-		//½¨Á¢ÎÄ¼ş
+		//å»ºç«‹æ–‡ä»¶
 		File iniFile = new File(sysTmpDir+File.separator+"utf8tool.ini");
-		//´æ·Å
+		//å­˜æ”¾
 		try {
 			OutputStream out = new FileOutputStream(iniFile);
-			p.store(out, "UTF8×ªÂë¹¤¾ß---Geekxx.com");
+			p.store(out, "UTF8è½¬ç å·¥å…·---Geekxx.com");
 			out.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -155,8 +156,8 @@ public class CommonUtil {
 	
 	
 	/**
-	 * ÓÃnotepad++´ò¿ªÎÄ¼ş
-	 * @param filepath ÎÄ¼şµÄÂ·¾¶
+	 * ç”¨notepad++æ‰“å¼€æ–‡ä»¶
+	 * @param filepath æ–‡ä»¶çš„è·¯å¾„
 	 */
 	public static void editInNotepad(String filepath){
 		
@@ -171,10 +172,21 @@ public class CommonUtil {
 	}
 	
 	/**
-	 * ÓÃnotepad++´ò¿ªÎÄ¼ş
-	 * @param file ÎÄ¼ş
+	 * ç”¨notepad++æ‰“å¼€æ–‡ä»¶
+	 * @param file æ–‡ä»¶
 	 */
 	public static void editInNotepad(File file){
 		editInNotepad(file.getAbsolutePath());
+	}
+	
+	
+	
+	public static void authorize(){
+		while(true){
+			String input = JOptionPane.showInputDialog("ä½ æ˜¯ï¼Ÿ");
+			if ("henry".equals(input)) {
+				break;
+			}
+		}
 	}
 }

@@ -30,7 +30,7 @@
           <children>
             <GridPane alignment="CENTER" prefHeight="92.99990000000253" prefWidth="380.0">
               <children>
-                <TextField id="main_txtf_Filter" prefWidth="200.0" text="java,class,txt,css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField id="main_txtf_Filter" prefWidth="200.0" text="java,txt,css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TextField id="main_txtf_ShowDir" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                 <Button id="main_bt_ChooseDir" mnemonicParsing="false" text="选择文件" GridPane.columnIndex="2" GridPane.rowIndex="0" />
                 <Button id="main_bt_ListFilteredFiles" mnemonicParsing="false" text="列出" GridPane.columnIndex="2" GridPane.rowIndex="1" />
@@ -49,21 +49,19 @@
             </GridPane>
             <VBox alignment="CENTER" prefHeight="100.0" prefWidth="108.0">
               <children>
-                <Button id="main_bt_DetectNonUTF8" mnemonicParsing="false" prefHeight="30.0" prefWidth="97.0" text="检测非UTF-8">
+                <Button id="main_bt_DetectNonUTF8" graphicTextGap="4.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="97.0" text="检测非UTF-8" textFill="BLACK">
+                  <font>
+                    <Font size="12.0" />
+                  </font>
                   <VBox.margin>
-                    <Insets left="3.0" right="3.0" />
-                  </VBox.margin>
-                </Button>
-                <Button id="main_bt_Convert2UTF8" mnemonicParsing="false" prefHeight="30.0" prefWidth="97.0" text="转成UTF-8">
-                  <VBox.margin>
-                    <Insets top="2.0" />
+                    <Insets left="3.0" right="5.0" />
                   </VBox.margin>
                 </Button>
               </children>
             </VBox>
           </children>
         </HBox>
-        <Label id="label_message" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="482.0" style="-fx-padding:2px  4px 2px 18px" text="结果栏">
+        <Label id="label_message" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="482.0" style="-fx-padding:2px  4px 2px 18px;&#10;-fx-font-color:red" text="结果栏">
           <font>
             <Font size="14.0" />
           </font>

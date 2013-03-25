@@ -1,4 +1,4 @@
-package com.geekxx.utf8.tool;
+ï»¿package com.geekxx.utf8.tool;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,7 +19,7 @@ public class GKMenuEvent implements EventHandler<ActionEvent> {
 	AppMem mem;
 	
 	/**
-	 * µ¯´°ÊÓÍ¼¶ÔÏó
+	 * å¼¹çª—è§†å›¾å¯¹è±¡
 	 */
 	PopupView popupView;
 	
