@@ -1,4 +1,4 @@
-﻿package com.geekxx.utf8.tool;
+package com.geekxx.utf8.tool;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

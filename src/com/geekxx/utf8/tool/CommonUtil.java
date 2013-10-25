@@ -1,4 +1,4 @@
-﻿package com.geekxx.utf8.tool;
+package com.geekxx.utf8.tool;
 
 import info.monitorenter.cpdetector.io.ASCIIDetector;
 import info.monitorenter.cpdetector.io.ByteOrderMarkDetector;
@@ -32,21 +32,21 @@ public class CommonUtil {
 	
 	
 	/**
-	 * 第三方的一个文件编码检测器
-	 */
-	private static CodepageDetectorProxy detector = CodepageDetectorProxy.getInstance();
-	
-	//  初始化检测器, 等于是增强检测器
-	static{
-		detector.add(new ByteOrderMarkDetector()); 
-	    // The first instance delegated to tries to detect the meta charset attribut in html pages.
-	    detector.add(new ParsingDetector(true)); // be verbose about parsing.
-	    // This one does the tricks of exclusion and frequency detection, if first implementation is 
-	    // unsuccessful:
-	    detector.add(JChardetFacade.getInstance()); // Another singleton.
-	    detector.add(ASCIIDetector.getInstance()); // Fallbac
-	    detector.add(UnicodeDetector.getInstance());
-	}
+     * 第三方的一个文件编码检测器
+     */
+    private static CodepageDetectorProxy detector = CodepageDetectorProxy.getInstance();
+
+    //  初始化检测器, 等于是增强检测器
+    static{
+        detector.add(new ByteOrderMarkDetector());
+        // The first instance delegated to tries to detect the meta charset attribut in html pages.
+        detector.add(new ParsingDetector(true)); // be verbose about parsing.
+        // This one does the tricks of exclusion and frequency detection, if first implementation is
+        // unsuccessful:
+        detector.add(JChardetFacade.getInstance()); // Another singleton.
+        detector.add(ASCIIDetector.getInstance()); // Fallbac
+        detector.add(UnicodeDetector.getInstance());
+    }
 	
 	private static AppMem mem = AppMem.getInstance();
 	

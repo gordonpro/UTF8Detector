@@ -1,4 +1,4 @@
-﻿package com.geekxx.utf8.view;
+package com.geekxx.utf8.view;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;

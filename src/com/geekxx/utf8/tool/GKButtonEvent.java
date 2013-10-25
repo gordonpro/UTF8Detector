@@ -1,4 +1,4 @@
-﻿package com.geekxx.utf8.tool;
+package com.geekxx.utf8.tool;
 
 import java.io.File;
 import java.io.IOException;

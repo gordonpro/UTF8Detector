@@ -1,4 +1,4 @@
-﻿package com.geekxx.utf8;
+package com.geekxx.utf8;
 
 import java.io.File;
 import java.nio.charset.Charset;
